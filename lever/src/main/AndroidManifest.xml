@@ -1,0 +1,9 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.pin.lever">
+    <application>
+        <provider
+                android:name=".LeverProvider"
+                android:authorities="${applicationId}.com.pinload"
+                android:exported="false"/>
+    </application>
+</manifest>

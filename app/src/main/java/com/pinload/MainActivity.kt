@@ -7,12 +7,14 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu
 import android.view.MenuItem
+import com.google.gson.Gson
 import com.pin.lever.Lever
 import com.pin.lever.utils.ApiResponse
 import com.pin.lever.utils.Status
 import com.pin.lever.utils.ToastUtils
 import com.pin.lever.utils.isOnline
 import com.pinload.app.PinLoadApplication
+import com.pinload.datamodel.ItemInfo
 import com.pinload.di.ViewModelFactory
 
 import kotlinx.android.synthetic.main.activity_main.*
@@ -74,12 +76,13 @@ class MainActivity : BaseActivity() {
             Status.LOADING -> progressDialog.show()
             Status.SUCCESS -> {
                 progressDialog.dismiss()
-                ToastUtils.showLongToast(this, apiResponse.data.toString())
+                val gson = Gson()
+                val  items = gson.fromJson(apiResponse.data, Array<ItemInfo>::class.java).toList()
+                ToastUtils.showLongToast(this, "Total items: ${items.size}")
             }
             Status.ERROR -> {
                 progressDialog.dismiss()
                 print(apiResponse.error!!.localizedMessage)
-
             }
             else -> {
                 println("Completed! ${apiResponse.status}")

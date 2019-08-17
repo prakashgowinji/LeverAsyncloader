@@ -3,10 +3,13 @@ package com.pin.lever.utils
 import android.app.ProgressDialog
 import android.content.Context
 import android.net.ConnectivityManager
+import android.os.Environment
 import android.text.format.DateUtils
 import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.util.*
+import java.io.File.separator
+import okhttp3.ResponseBody
+import java.io.*
 
 
 fun getProgressDialog(context: Context, msg: String): ProgressDialog {
@@ -46,23 +49,51 @@ fun getMillisFromString(dateTimeString: String): Long {
 }
 
 
-fun getAge(dobString: String): Int {
-    var date: Date? = null
-    val sdf = SimpleDateFormat("yyyy-MM-dd")
+/**
+ * Method to create the file from the server response while downloading
+ */
+private fun writeResponseBodyToDisk(body: ResponseBody, filename: String): Boolean {
     try {
-        date = sdf.parse(dobString)
-    } catch (e: ParseException) {
-        e.printStackTrace()
-    }
-    if (date == null) return 0
-    val dateOfBirth = Calendar.getInstance()
-    val today = Calendar.getInstance()
-    dateOfBirth.time = date
-    var age = today.get(Calendar.YEAR) - dateOfBirth.get(Calendar.YEAR)
-    if (today.get(Calendar.DAY_OF_YEAR) < dateOfBirth.get(Calendar.DAY_OF_YEAR)) {
-        age--
-    }
-    val ageInt = age
+        // Todo change the file location/name according to your needs
+        val futureStudioIconFile = File(Environment.getExternalStorageDirectory().getPath() + separator + filename)
 
-    return ageInt
+        var inputStream: InputStream? = null
+        var outputStream: OutputStream? = null
+
+        try {
+            val fileReader = ByteArray(4096)
+
+            val fileSize = body.contentLength()
+            var fileSizeDownloaded: Long = 0
+
+            inputStream = body.byteStream()
+            outputStream = FileOutputStream(futureStudioIconFile)
+
+            while (true) {
+                val read = inputStream!!.read(fileReader)
+
+                if (read == -1) {
+                    break
+                }
+
+                outputStream!!.write(fileReader, 0, read)
+
+                fileSizeDownloaded += read.toLong()
+            }
+            outputStream!!.flush()
+            return true
+        } catch (e: IOException) {
+            return false
+        } finally {
+            if (inputStream != null) {
+                inputStream!!.close()
+            }
+
+            if (outputStream != null) {
+                outputStream!!.close()
+            }
+        }
+    } catch (e: IOException) {
+        return false
+    }
 }

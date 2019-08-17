@@ -33,6 +33,35 @@ class MainViewModel(val repository: Repository) : ViewModel() {
 
     }
 
+
+    /**
+     * To download a static file, where the file path could be edited in ApiCallInterface
+     */
+    fun hitDownloadfile(){
+        disposables.add(repository.excuteDownloadFile()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { d -> responseLiveData.setValue(ApiResponse.loading()) }
+            .subscribe(
+                { result -> responseLiveData.setValue(ApiResponse.complete(result)) },
+                { throwable -> responseLiveData.setValue(ApiResponse.error(throwable)) }
+            ))
+    }
+
+    /**
+     * To download a file with a specific file path
+     */
+    fun hitDownloadfile(fileUrl: String){
+        disposables.add(repository.excuteDownloadFile(fileUrl)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { d -> responseLiveData.setValue(ApiResponse.loading()) }
+            .subscribe(
+                { result -> responseLiveData.setValue(ApiResponse.complete(result)) },
+                { throwable -> responseLiveData.setValue(ApiResponse.error(throwable)) }
+            ))
+    }
+
     override fun onCleared() {
         disposables.clear()
     }

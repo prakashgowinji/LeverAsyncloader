@@ -15,7 +15,7 @@ class PinLoadApplication: Application() {
     override fun onCreate() {
         super.onCreate()
         context = this
-        applicationComponent = DaggerAppComponent.builder().appModule(AppModule(this)).apiModule(ApiModule()).liveDataModule(
+        applicationComponent = DaggerAppComponent.builder().appModule(AppModule(this)).apiModule(ApiModule(context)).liveDataModule(
             LiveDataModule()).build()
     }
 

@@ -5,8 +5,10 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.LinearLayout
 import com.google.gson.Gson
 import com.pin.lever.Lever
 import com.pin.lever.utils.ApiResponse
@@ -40,7 +42,6 @@ class MainActivity : BaseActivity() {
             }
         })
 
-        Lever.get().load("http://i.imgur.com/DvpvklR.png").into(imageView);
         loadContent()
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -48,10 +49,19 @@ class MainActivity : BaseActivity() {
         }
     }
 
+    fun updateList(items: List<ItemInfo>){
+        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
+        val adapter = ItemListAdapter(items)
+        recyclerView.adapter = adapter
+    }
+
+    /**
+     * Since Cache is enabled, internet check is commented out
+     */
     fun loadContent() {
-        if (!isOnline(this))
-            ToastUtils.showShortToast(this, resources.getString(R.string.network_error))
-        else
+//        if (!isOnline(this))
+//            ToastUtils.showShortToast(this, resources.getString(R.string.network_error))
+//        else
             viewModel.hitMainpageContent()
     }
 
@@ -71,6 +81,9 @@ class MainActivity : BaseActivity() {
         }
     }
 
+    /**
+     * Method that update with the response
+     */
     override fun consumeResponse(apiResponse: ApiResponse) {
         when (apiResponse.status) {
             Status.LOADING -> progressDialog.show()
@@ -78,6 +91,7 @@ class MainActivity : BaseActivity() {
                 progressDialog.dismiss()
                 val gson = Gson()
                 val  items = gson.fromJson(apiResponse.data, Array<ItemInfo>::class.java).toList()
+                updateList(items)
                 ToastUtils.showLongToast(this, "Total items: ${items.size}")
             }
             Status.ERROR -> {

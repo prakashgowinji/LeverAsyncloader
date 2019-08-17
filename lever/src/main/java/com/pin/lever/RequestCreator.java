@@ -401,7 +401,7 @@ public class RequestCreator {
         checkNotMain();
 
         if (deferred) {
-            throw new IllegalStateException("Fit cannot be used with get.");
+            throw new IllegalStateException("Fit cannot be used with instance.");
         }
         if (!data.hasImage()) {
             return null;

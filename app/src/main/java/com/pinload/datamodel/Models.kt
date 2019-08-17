@@ -18,11 +18,11 @@ data class ProfileImage(
 )
 
 data class Link(
-    @SerializedName("self") val self: String,
-    @SerializedName("html") val html: String,
-    @SerializedName("photos") val photos: String,
-    @SerializedName("likes") val likes: String,
-    @SerializedName("download") val download: String
+    @SerializedName("self") val self: String?,
+    @SerializedName("html") val html: String?,
+    @SerializedName("photos") val photos: String?,
+    @SerializedName("likes") val likes: String?,
+    @SerializedName("download") val download: String?
 )
 
 data class Url(

@@ -44,7 +44,7 @@ import static com.pin.lever.Utils.log;
 /**
  * Image downloading, transformation, and caching manager.
  * <p>
- * Use {@link #get()} for the global singleton instance
+ * Use {@link #instance()} for the global singleton instance
  * or construct your own instance with {@link Builder}.
  */
 public class Lever {
@@ -63,7 +63,7 @@ public class Lever {
      * modify any information about a request.
      * <p>
      * For example, if you use a CDN you can change the hostname for the image based on the current
-     * location of the user in order to get faster download speeds.
+     * location of the user in order to instance faster download speeds.
      * <p>
      * <b>NOTE:</b> This is a beta feature. The API is subject to change in a backwards incompatible
      * way at any time.
@@ -658,7 +658,7 @@ public class Lever {
      * {@link Lever} instance. You can either use this directly or by setting it as the global
      * instance with {@link #setSingletonInstance}.
      */
-    public static Lever get() {
+    public static Lever instance() {
         if (singleton == null) {
             synchronized (Lever.class) {
                 if (singleton == null) {
@@ -673,9 +673,9 @@ public class Lever {
     }
 
     /**
-     * Set the global instance returned from {@link #get}.
+     * Set the global instance returned from {@link #instance}.
      * <p>
-     * This method must be called before any calls to {@link #get} and may only be called once.
+     * This method must be called before any calls to {@link #instance} and may only be called once.
      */
     public static void setSingletonInstance(@NonNull Lever lever) {
         if (lever == null) {

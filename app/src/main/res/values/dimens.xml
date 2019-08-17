@@ -7,4 +7,5 @@
     <dimen name="margin_xx_large">20dp</dimen>
     <dimen name="margin_xxx_large">24dp</dimen>
     <dimen name="text_username">12sp</dimen>
+    <dimen name="text_datetime">13sp</dimen>
 </resources>

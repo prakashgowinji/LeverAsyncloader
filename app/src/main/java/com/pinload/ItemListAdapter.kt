@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.pin.lever.Lever
+import com.pinload.datamodel.Category
 import com.pinload.datamodel.ItemInfo
 
 
@@ -32,14 +33,29 @@ class ItemListAdapter(val items: List<ItemInfo>) : RecyclerView.Adapter<ItemList
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bindItems(itemInfo: ItemInfo) {
+            val textId = itemView.findViewById(R.id.id) as TextView
             val textViewName = itemView.findViewById(R.id.name) as TextView
             val textViewusername  = itemView.findViewById(R.id.username) as TextView
+            val textViewCategory  = itemView.findViewById(R.id.categories) as TextView
             val createdAt  = itemView.findViewById(R.id.datetime) as TextView
             val profileImage  = itemView.findViewById(R.id.profileImage) as ImageView
             Lever.instance().load(itemInfo.user.profileImage.large).into(profileImage);
             textViewName.text = itemInfo.user.name
+            textId.text = itemInfo.user.id
             textViewusername.text = itemInfo.user.userName
             createdAt.text = itemInfo.createdAt
+            textViewCategory.text = getCategories(itemInfo.categories)
+        }
+
+        fun getCategories(categories: List<Category>): String{
+            var category = ""
+            if(categories.size > 0){
+                for(item in categories) {
+                    category += item.title + ", "
+                }
+            }
+            return "Categories: " + category
+
         }
     }
 }

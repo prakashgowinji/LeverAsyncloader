@@ -725,11 +725,11 @@ public class RequestCreator {
             if (Build.VERSION.SDK_INT >= 21) {
                 return lever.context.getDrawable(placeholderResId);
             } else if (Build.VERSION.SDK_INT >= 16) {
-                return lever.context.getResources().getDrawable(placeholderResId);
+                return lever.context.getResources().getDrawable(placeholderResId, null);
             } else {
                 TypedValue value = new TypedValue();
                 lever.context.getResources().getValue(placeholderResId, value, true);
-                return lever.context.getResources().getDrawable(value.resourceId);
+                return lever.context.getResources().getDrawable(value.resourceId, null);
             }
         } else {
             return placeholderDrawable; // This may be null which is expected and desired behavior.

@@ -9,8 +9,8 @@ import com.pinload.di.DaggerAppComponent
 import com.pinload.di.LiveDataModule
 
 class PinLoadApplication: Application() {
-    lateinit var applicationComponent: AppComponent
-    lateinit var context: Context
+    private lateinit var applicationComponent: AppComponent
+    private lateinit var context: Context
 
     override fun onCreate() {
         super.onCreate()

@@ -5,24 +5,24 @@ import io.reactivex.annotations.NonNull
 import io.reactivex.annotations.Nullable
 import okhttp3.ResponseBody
 
-class ApiResponse {
-    lateinit var status: Status
+class ApiResponse(val status: Status, @Nullable val data: JsonElement?, @Nullable val error: Throwable?, @Nullable val file: ResponseBody?) {
+//    lateinit var status: Status
+//
+//    @Nullable
+//    var data: JsonElement?
+//
+//    @Nullable
+//    var file: ResponseBody?
+//
+//    @Nullable
+//    var error: Throwable?
 
-    @Nullable
-    var data: JsonElement?
-
-    @Nullable
-    var file: ResponseBody?
-
-    @Nullable
-    var error: Throwable?
-
-    constructor(status: Status, @Nullable data: JsonElement?, @Nullable error: Throwable?, @Nullable file: ResponseBody?) {
-        this.status = status
-        this.data = data
-        this.error = error
-        this.file = file
-    }
+//    constructor(val status: Status, @Nullable val data: JsonElement?, @Nullable val error: Throwable?, @Nullable val file: ResponseBody?) {
+//        this.status = status
+//        this.data = data
+//        this.error = error
+//        this.file = file
+//    }
 
     companion object {
         fun loading(): ApiResponse {

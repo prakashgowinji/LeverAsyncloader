@@ -25,10 +25,8 @@ fun isOnline(context: Context): Boolean {
     val netInfo = connectivity.activeNetworkInfo
     if (netInfo == null) {
         return false
-    } else {
-        return netInfo.isConnected
     }
-    return false
+    return netInfo.isConnected
 }
 
 fun getRelativeTimeSpan(millisTime: Long): CharSequence {
@@ -40,8 +38,7 @@ fun getMillisFromString(dateTimeString: String): Long {
     val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
     try {
         val mDate = simpleDateFormat.parse(dateTimeString)
-        val timeInMilliseconds = mDate.getTime()
-        return timeInMilliseconds
+        return mDate.getTime()
     } catch (e: ParseException) {
         e.printStackTrace()
     }
@@ -76,21 +73,21 @@ private fun writeResponseBodyToDisk(body: ResponseBody, filename: String): Boole
                     break
                 }
 
-                outputStream!!.write(fileReader, 0, read)
+                outputStream.write(fileReader, 0, read)
 
                 fileSizeDownloaded += read.toLong()
             }
-            outputStream!!.flush()
+            outputStream.flush()
             return true
         } catch (e: IOException) {
             return false
         } finally {
             if (inputStream != null) {
-                inputStream!!.close()
+                inputStream.close()
             }
 
             if (outputStream != null) {
-                outputStream!!.close()
+                outputStream.close()
             }
         }
     } catch (e: IOException) {

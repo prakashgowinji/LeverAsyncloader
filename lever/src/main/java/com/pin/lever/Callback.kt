@@ -1,9 +1,9 @@
 package com.pin.lever
 
 interface Callback {
-    abstract fun onSuccess()
+    fun onSuccess()
 
-    abstract fun onError(e: Exception)
+    fun onError(e: Exception)
 
     class EmptyCallback : Callback {
 

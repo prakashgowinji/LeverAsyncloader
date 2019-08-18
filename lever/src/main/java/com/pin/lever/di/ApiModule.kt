@@ -50,7 +50,7 @@ class ApiModule(val context: Context) {
     @Provides
     @Singleton
     internal fun getApiCallInterface(retrofit: Retrofit): ApiCallInterface {
-        return retrofit.create<ApiCallInterface>(ApiCallInterface::class.java!!)
+        return retrofit.create<ApiCallInterface>(ApiCallInterface::class.java)
     }
 
     @Provides
@@ -63,7 +63,7 @@ class ApiModule(val context: Context) {
 
         httpClient.addInterceptor { chain ->
             var request = chain.request()
-            request = if (isOnline(context)!!)
+            request = if (isOnline(context))
                 request.newBuilder().header("Cache-Control", "public, max-age=" + 5).build()
             else
                 request.newBuilder().header("Cache-Control", "public, only-if-cached, max-stale=" + 60 * 60 * 24 * 7).build()

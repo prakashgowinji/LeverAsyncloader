@@ -10,11 +10,11 @@ interface Downloader {
      * @throws IOException if the requested URL cannot successfully be loaded.
      */
     @Throws(IOException::class)
-    abstract fun load(request: okhttp3.Request): Response
+    fun load(request: okhttp3.Request): Response
 
     /**
      * Allows to perform a clean up for this [Downloader] including closing the disk cache and
      * other resources.
      */
-    abstract fun shutdown()
+    fun shutdown()
 }

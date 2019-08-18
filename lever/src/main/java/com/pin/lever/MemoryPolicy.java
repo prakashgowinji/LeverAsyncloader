@@ -3,7 +3,7 @@ package com.pin.lever;
 public enum MemoryPolicy {
 
     /** Skips memory cache lookup when processing a request. */
-    NO_CACHE(1 << 0),
+    NO_CACHE(1),
     /**
      * Skips storing the final result into memory cache. Useful for one-off requests
      * to avoid evicting other bitmaps from the cache.

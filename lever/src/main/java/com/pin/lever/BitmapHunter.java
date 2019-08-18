@@ -584,9 +584,9 @@ class BitmapHunter implements Runnable {
                     scaleY = targetHeight / (float) drawHeight;
                 } else if (widthRatio < heightRatio) {
                     int newSize = (int) Math.ceil(inWidth * (widthRatio / heightRatio));
-                    if ((data.centerCropGravity & Gravity.LEFT) == Gravity.LEFT) {
+                    if ((data.centerCropGravity & Gravity.START) == Gravity.START) {
                         drawX = 0;
-                    } else if ((data.centerCropGravity & Gravity.RIGHT) == Gravity.RIGHT) {
+                    } else if ((data.centerCropGravity & Gravity.END) == Gravity.END) {
                         drawX = inWidth - newSize;
                     } else {
                         drawX = (inWidth - newSize) / 2;

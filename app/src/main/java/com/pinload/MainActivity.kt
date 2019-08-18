@@ -4,17 +4,12 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.LinearLayout
 import com.google.gson.Gson
-import com.pin.lever.Lever
 import com.pin.lever.utils.ApiResponse
 import com.pin.lever.utils.Status
 import com.pin.lever.utils.ToastUtils
-import com.pin.lever.utils.isOnline
 import com.pinload.app.PinLoadApplication
 import com.pinload.datamodel.ItemInfo
 import com.pinload.di.ViewModelFactory
@@ -27,7 +22,7 @@ class MainActivity : BaseActivity() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
-    lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +44,7 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    fun updateList(items: List<ItemInfo>){
+    private fun updateList(items: List<ItemInfo>){
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
         val adapter = ItemListAdapter(items)
         recyclerView.adapter = adapter
@@ -58,7 +53,7 @@ class MainActivity : BaseActivity() {
     /**
      * Since Cache is enabled, internet check is commented out
      */
-    fun loadContent() {
+    private fun loadContent() {
 //        if (!isOnline(this))
 //            ToastUtils.showShortToast(this, resources.getString(R.string.network_error))
 //        else

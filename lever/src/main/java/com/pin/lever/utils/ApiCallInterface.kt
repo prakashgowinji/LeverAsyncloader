@@ -2,7 +2,6 @@ package com.pin.lever.utils
 
 import com.google.gson.JsonElement
 import io.reactivex.Observable
-import okhttp3.Call
 import retrofit2.http.GET
 import okhttp3.ResponseBody
 import retrofit2.http.Url

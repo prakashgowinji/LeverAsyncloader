@@ -15,7 +15,7 @@ class ViewModelFactory: ViewModelProvider.Factory {
     }
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if(modelClass.isAssignableFrom(MainViewModel::class.java!!)){
+        if(modelClass.isAssignableFrom(MainViewModel::class.java)){
            return MainViewModel(repository = repository) as T
         }
         throw IllegalArgumentException("unknown Class name!")

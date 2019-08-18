@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.pin.lever.Lever
+import com.pin.lever.utils.getMillisFromString
+import com.pin.lever.utils.getRelativeTimeSpan
 import com.pinload.datamodel.Category
 import com.pinload.datamodel.ItemInfo
 
@@ -43,7 +45,7 @@ class ItemListAdapter(private val items: List<ItemInfo>) : RecyclerView.Adapter<
             textViewName.text = itemInfo.user.name
             textId.text = itemInfo.user.id
             textViewusername.text = itemInfo.user.userName
-            createdAt.text = itemInfo.createdAt
+            createdAt.text = getRelativeTimeSpan(getMillisFromString(itemInfo.createdAt))
             textViewCategory.text = getCategories(itemInfo.categories)
         }
 

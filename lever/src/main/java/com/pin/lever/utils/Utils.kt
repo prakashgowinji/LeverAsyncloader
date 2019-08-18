@@ -35,7 +35,7 @@ fun getRelativeTimeSpan(millisTime: Long): CharSequence {
 }
 
 fun getMillisFromString(dateTimeString: String): Long {
-    val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+    val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
     try {
         val mDate = simpleDateFormat.parse(dateTimeString)
         return mDate.getTime()

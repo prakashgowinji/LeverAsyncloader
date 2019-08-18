@@ -26,9 +26,15 @@ android {
     }
 
     buildTypes {
+        def STRING = "String"
+        def BASE_URL = "BASE_URL"
         release {
+            buildConfigField(STRING, BASE_URL, '"http://pastebin.com/"')
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            buildConfigField(STRING, BASE_URL, '"http://pastebin.com/"')
         }
     }
 

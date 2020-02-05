@@ -13,7 +13,8 @@ import com.pinload.datamodel.Category
 import com.pinload.datamodel.ItemInfo
 
 
-class ItemListAdapter(private val items: List<ItemInfo>) : RecyclerView.Adapter<ItemListAdapter.ViewHolder>() {
+class ItemListAdapter(private val items: List<ItemInfo>) :
+    RecyclerView.Adapter<ItemListAdapter.ViewHolder>() {
 
     // This method is returning the view for each item in the list
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,11 +38,11 @@ class ItemListAdapter(private val items: List<ItemInfo>) : RecyclerView.Adapter<
         fun bindItems(itemInfo: ItemInfo) {
             val textId = itemView.findViewById(R.id.id) as TextView
             val textViewName = itemView.findViewById(R.id.name) as TextView
-            val textViewusername  = itemView.findViewById(R.id.username) as TextView
-            val textViewCategory  = itemView.findViewById(R.id.categories) as TextView
-            val createdAt  = itemView.findViewById(R.id.datetime) as TextView
-            val profileImage  = itemView.findViewById(R.id.profileImage) as ImageView
-            Lever.instance().load(itemInfo.user.profileImage.large).into(profileImage)
+            val textViewusername = itemView.findViewById(R.id.username) as TextView
+            val textViewCategory = itemView.findViewById(R.id.categories) as TextView
+            val createdAt = itemView.findViewById(R.id.datetime) as TextView
+            val profileImage = itemView.findViewById(R.id.profileImage) as ImageView
+            Lever.instance()!!.load(itemInfo.user.profileImage.large).into(profileImage)
             textViewName.text = itemInfo.user.name
             textId.text = itemInfo.user.id
             textViewusername.text = itemInfo.user.userName
@@ -49,10 +50,10 @@ class ItemListAdapter(private val items: List<ItemInfo>) : RecyclerView.Adapter<
             textViewCategory.text = getCategories(itemInfo.categories)
         }
 
-        private fun getCategories(categories: List<Category>): String{
+        private fun getCategories(categories: List<Category>): String {
             var category = ""
-            if(categories.isNotEmpty()){
-                for(item in categories) {
+            if (categories.isNotEmpty()) {
+                for (item in categories) {
                     category += item.title + ", "
                 }
             }

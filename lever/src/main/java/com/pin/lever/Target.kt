@@ -30,5 +30,5 @@ interface Target {
      * specified via [RequestCreator.placeholder]
      * or [RequestCreator.placeholder].
      */
-    abstract fun onPrepareLoad(placeHolderDrawable: Drawable)
+    abstract fun onPrepareLoad(placeHolderDrawable: Drawable?)
 }

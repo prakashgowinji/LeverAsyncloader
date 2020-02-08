@@ -29,7 +29,7 @@ abstract class Action<T>(
     val memoryPolicy: Int
     val networkPolicy: Int
     val errorResId: Int
-    val errorDrawable: Drawable
+    val errorDrawable: Drawable?
     val key: String
     val tag: Any
     var willReplay = false
@@ -61,7 +61,7 @@ abstract class Action<T>(
         this.networkPolicy = networkPolicy
         this.noFade = noFade
         this.errorResId = errorResId
-        this.errorDrawable = errorDrawable!!
+        this.errorDrawable = errorDrawable
         this.key = key!!
         this.tag = tag ?: this
     }

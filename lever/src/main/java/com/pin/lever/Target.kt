@@ -20,7 +20,7 @@ interface Target {
      * specified via [RequestCreator.error]
      * or [RequestCreator.error].
      */
-    abstract fun onBitmapFailed(e: Exception, errorDrawable: Drawable)
+    abstract fun onBitmapFailed(e: Exception, errorDrawable: Drawable?)
 
     /**
      * Callback invoked right before your request is submitted.

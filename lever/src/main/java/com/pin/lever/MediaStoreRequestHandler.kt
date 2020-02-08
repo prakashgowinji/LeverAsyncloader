@@ -52,7 +52,8 @@ internal class MediaStoreRequestHandler(context: Context?) :
             )
             val bitmap: Bitmap?
             bitmap =
-                if (isVideo) { // Since MediaStore doesn't provide the full screen kind thumbnail, we use the mini kind
+                if (isVideo) {
+                    // Since MediaStore doesn't provide the full screen kind thumbnail, we use the mini kind
 // instead which is the largest thumbnail size can be fetched from MediaStore.
                     val kind =
                         if (leverKind == LeverKind.FULL) MediaStore.Video.Thumbnails.MINI_KIND else leverKind.androidKind

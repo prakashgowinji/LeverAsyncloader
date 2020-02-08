@@ -499,7 +499,7 @@ class Lever internal constructor(
 // when there is nothing to do.
 // This behavior has been tested and reproduced with heap dumps.
                     val remove =
-                        referenceQueue.remove(THREAD_LEAK_CLEANING_MS as Long) as RequestWeakReference<*>
+                        referenceQueue.remove(THREAD_LEAK_CLEANING_MS.toLong()) as RequestWeakReference<*>?
                     val message = handler.obtainMessage()
                     if (remove != null) {
                         message.what = Dispatcher.REQUEST_GCED

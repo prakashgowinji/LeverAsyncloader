@@ -101,7 +101,7 @@ internal object Utils {
 
     @JvmStatic
     fun getLogIdsForHunter(hunter: BitmapHunter, prefix: String?): String {
-        val builder = StringBuilder(prefix)
+        val builder = StringBuilder(prefix!!)
         val action = hunter.action
         if (action != null) {
             builder.append(action.request!!.logId())
@@ -174,8 +174,8 @@ internal object Utils {
         }
         if (data.transformations != null) {
             var i = 0
-            val count = data!!.transformations!!.size
-            val transformations: MutableList<Transformation>? = data!!.transformations
+            val count = data.transformations!!.size
+            val transformations: MutableList<Transformation>? = data.transformations
             while (i < count) {
                 val key = transformations!![i].key()
                 if(key != null) {
@@ -268,7 +268,7 @@ internal object Utils {
     @JvmStatic
     fun hasPermission(
         context: Context,
-        permission: String?
+        permission: String
     ): Boolean {
         return context.checkCallingOrSelfPermission(permission) == PackageManager.PERMISSION_GRANTED
     }

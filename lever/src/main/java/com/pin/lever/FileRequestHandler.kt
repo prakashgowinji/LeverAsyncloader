@@ -32,7 +32,7 @@ internal class FileRequestHandler(context: Context?) :
         @Throws(IOException::class)
         fun getFileExifRotation(uri: Uri?): Int {
             val exifInterface =
-                ExifInterface(uri!!.path)
+                ExifInterface(uri!!.path!!)
             return exifInterface.getAttributeInt(
                 ExifInterface.TAG_ORIENTATION,
                 ExifInterface.ORIENTATION_NORMAL

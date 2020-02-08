@@ -163,18 +163,18 @@ abstract class RequestHandler {
                 val widthRatio: Int
                 if (reqHeight == 0) {
                     sampleSize = floor(
-                        width.toFloat() / reqWidth as Double
+                        width.toFloat() / reqWidth
                     ).toInt()
                 } else if (reqWidth == 0) {
                     sampleSize = floor(
-                        height.toFloat() / reqHeight as Double
+                        height.toFloat() / reqHeight
                     ).toInt()
                 } else {
                     heightRatio = floor(
-                        height.toFloat() / reqHeight as Double
+                        height.toFloat() / reqHeight
                     ).toInt()
                     widthRatio = floor(
-                        width.toFloat() / reqWidth as Double
+                        width.toFloat() / reqWidth
                     ).toInt()
                     sampleSize = if (request.centerInside) Math.max(
                         heightRatio,

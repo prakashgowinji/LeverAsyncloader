@@ -92,7 +92,7 @@ internal class ContactsPhotoRequestHandler(private val context: Context) :
                 true
             )
             ID_THUMBNAIL, ID_DISPLAY_PHOTO -> contentResolver.openInputStream(
-                uri
+                uri!!
             )
             else -> throw IllegalStateException("Invalid uri: $uri")
         }

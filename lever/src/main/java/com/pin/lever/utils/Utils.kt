@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat
 import java.io.File.separator
 import okhttp3.ResponseBody
 import java.io.*
+import java.util.*
 
 
 fun getProgressDialog(context: Context, msg: String): ProgressDialog {
@@ -22,10 +23,7 @@ fun getProgressDialog(context: Context, msg: String): ProgressDialog {
 fun isOnline(context: Context): Boolean {
     val connectivity = context
         .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-    val netInfo = connectivity.activeNetworkInfo
-    if (netInfo == null) {
-        return false
-    }
+    val netInfo = connectivity.activeNetworkInfo ?: return false
     return netInfo.isConnected
 }
 
@@ -35,10 +33,10 @@ fun getRelativeTimeSpan(millisTime: Long): CharSequence {
 }
 
 fun getMillisFromString(dateTimeString: String): Long {
-    val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+    val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault())
     try {
         val mDate = simpleDateFormat.parse(dateTimeString)
-        return mDate.getTime()
+        return mDate.time
     } catch (e: ParseException) {
         e.printStackTrace()
     }
@@ -82,13 +80,8 @@ private fun writeResponseBodyToDisk(body: ResponseBody, filename: String): Boole
         } catch (e: IOException) {
             return false
         } finally {
-            if (inputStream != null) {
-                inputStream.close()
-            }
-
-            if (outputStream != null) {
-                outputStream.close()
-            }
+            inputStream?.close()
+            outputStream?.close()
         }
     } catch (e: IOException) {
         return false

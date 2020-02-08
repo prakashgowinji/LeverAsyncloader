@@ -26,7 +26,7 @@ internal open class ContentStreamRequestHandler(val context: Context) :
     @Throws(FileNotFoundException::class)
     fun getInputStream(request: Request?): InputStream {
         val contentResolver = context.contentResolver
-        return contentResolver.openInputStream(request!!.uri)
+        return contentResolver.openInputStream(request!!.uri!!)
     }
 
 }

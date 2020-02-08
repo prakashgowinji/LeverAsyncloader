@@ -297,7 +297,7 @@ class BitmapHunter private constructor(
          */
         @Throws(IOException::class)
         fun decodeStream(source: Source?, request: Request): Bitmap {
-            val bufferedSource = Okio.buffer(source)
+            val bufferedSource = Okio.buffer(source!!)
             val isWebPFile = isWebPFile(bufferedSource)
             val isPurgeable =
                 request.purgeable && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP

@@ -15,7 +15,7 @@ internal class ResourceRequestHandler(private val context: Context) :
     override fun canHandleRequest(data: Request?): Boolean {
         return if (data!!.resourceId != 0) {
             true
-        } else ContentResolver.SCHEME_ANDROID_RESOURCE == data!!.uri!!.scheme
+        } else ContentResolver.SCHEME_ANDROID_RESOURCE == data.uri!!.scheme
     }
 
     @Throws(IOException::class)

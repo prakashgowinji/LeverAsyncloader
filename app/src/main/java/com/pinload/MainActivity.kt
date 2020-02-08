@@ -2,14 +2,18 @@ package com.pinload
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import android.widget.LinearLayout
 import com.google.gson.Gson
 import com.pin.lever.utils.ApiResponse
 import com.pin.lever.utils.Status
 import com.pin.lever.utils.ToastUtils
+import com.pin.lever.utils.isOnline
 import com.pinload.app.PinLoadApplication
 import com.pinload.datamodel.ItemInfo
 import com.pinload.di.ViewModelFactory
@@ -36,15 +40,15 @@ class MainActivity : BaseActivity() {
                 consumeResponse(apiResponse)
             }
         })
-
         loadContent()
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+        btnRetry.setOnClickListener(View.OnClickListener {
+            loadContent()
+        })
     }
 
-    private fun updateList(items: List<ItemInfo>){
+    private fun updateList(items: List<ItemInfo>) {
+        groupAlert.visibility = View.GONE
+        recyclerView.visibility = View.VISIBLE
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayout.VERTICAL, false)
         val adapter = ItemListAdapter(items)
         recyclerView.adapter = adapter
@@ -54,10 +58,18 @@ class MainActivity : BaseActivity() {
      * Since Cache is enabled, internet check is commented out
      */
     private fun loadContent() {
-//        if (!isOnline(this))
-//            ToastUtils.showShortToast(this, resources.getString(R.string.network_error))
-//        else
+        if (!isOnline(this)) {
+            groupAlert.visibility = View.VISIBLE
+            textNoItem.text = getString(R.string.no_network)
+            recyclerView.visibility = View.GONE
+            Snackbar.make(parentView, getString(R.string.no_network), Snackbar.LENGTH_LONG)
+                .setAction(getString(R.string.lbl_connect)) {
+                    startActivity(Intent(Settings.ACTION_WIFI_SETTINGS))
+                }.show()
+            ToastUtils.showShortToast(this, resources.getString(R.string.network_error))
+        } else {
             viewModel.hitMainpageContent()
+        }
     }
 
     /**
@@ -68,8 +80,7 @@ class MainActivity : BaseActivity() {
             Status.LOADING -> progressDialog.show()
             Status.SUCCESS -> {
                 progressDialog.dismiss()
-                val gson = Gson()
-                val  items = gson.fromJson(apiResponse.data, Array<ItemInfo>::class.java).toList()
+                val items = Gson().fromJson(apiResponse.data, Array<ItemInfo>::class.java).toList()
                 updateList(items)
                 ToastUtils.showLongToast(this, "Total items: ${items.size}")
             }

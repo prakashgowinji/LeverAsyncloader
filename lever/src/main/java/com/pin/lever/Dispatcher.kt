@@ -480,7 +480,7 @@ class Dispatcher(
                     dispatcher.performBatchComplete()
                 }
                 NETWORK_STATE_CHANGE -> {
-                    val info = msg.obj as NetworkInfo
+                    val info = msg.obj as NetworkInfo?
                     dispatcher.performNetworkStateChange(info)
                 }
                 AIRPLANE_MODE_CHANGE -> {

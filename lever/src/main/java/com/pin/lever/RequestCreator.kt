@@ -364,7 +364,7 @@ class RequestCreator {
         val key = createKey(finalData, StringBuilder())
         val action: Action<*> =
             GetAction(lever, finalData, memoryPolicy, networkPolicy, tag, key)
-        return BitmapHunter.forRequest(lever!!, lever!!.dispatcher, lever.cache, lever.stats, action)
+        return BitmapHunter.forRequest(lever!!, lever.dispatcher, lever.cache, lever.stats, action)
             .hunt()
     }
     /**

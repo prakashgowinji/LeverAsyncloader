@@ -11,16 +11,12 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.LinearLayout
 import com.google.gson.Gson
-import com.pin.lever.utils.ApiResponse
-import com.pin.lever.utils.Status
-import com.pin.lever.utils.ToastUtils
-import com.pin.lever.utils.isOnline
+import com.pin.lever.utils.*
 import com.pinload.app.PinLoadApplication
 import com.pinload.datamodel.ItemInfo
 import com.pinload.di.ViewModelFactory
 import com.pinload.utils.Constants.KEY_IS_DATA_LOADED
 import com.pinload.utils.ListItemClickListener
-import com.pinload.utils.PreferenceHelper
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*

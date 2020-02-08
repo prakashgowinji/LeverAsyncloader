@@ -1,4 +1,4 @@
-package com.pinload.utils
+package com.pin.lever.utils
 
 import android.content.Context
 import android.content.SharedPreferences

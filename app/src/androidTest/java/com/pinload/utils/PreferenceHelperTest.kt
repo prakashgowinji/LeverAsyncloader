@@ -11,7 +11,7 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class PreferenceHelperTest {
-    val context: Context = ApplicationProvider.getApplicationContext<Context>()
+    private val context: Context = ApplicationProvider.getApplicationContext<Context>()
     private lateinit var sharedPreferences: SharedPreferences
     private val preferenceName = PREFERENCE_NAME
 

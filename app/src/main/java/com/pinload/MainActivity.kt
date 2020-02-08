@@ -48,7 +48,7 @@ class MainActivity : BaseActivity() {
         })
 
         if(sharedPreferences.getBoolean(KEY_IS_DATA_LOADED, false)){
-            viewModel.hitMainpageContent()
+            viewModel.hitMainPageContent()
         } else {
             loadContent()
         }
@@ -85,7 +85,7 @@ class MainActivity : BaseActivity() {
                 }.show()
             ToastUtils.showShortToast(this, resources.getString(R.string.network_error))
         } else {
-            viewModel.hitMainpageContent()
+            viewModel.hitMainPageContent()
         }
     }
 

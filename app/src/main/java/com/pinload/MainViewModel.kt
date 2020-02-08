@@ -21,7 +21,7 @@ class MainViewModel(val repository: Repository) : ViewModel() {
      * method to call normal GET method of Retrofit
      *
      * */
-    fun hitMainpageContent() {
+    fun hitMainPageContent() {
         disposables.add(repository.executeGetInfo()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -37,7 +37,7 @@ class MainViewModel(val repository: Repository) : ViewModel() {
     /**
      * To download a static file, where the file path could be edited in ApiCallInterface
      */
-    fun hitDownloadfile(){
+    fun hitDownloadFile(){
         disposables.add(repository.excuteDownloadFile()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -51,7 +51,7 @@ class MainViewModel(val repository: Repository) : ViewModel() {
     /**
      * To download a file with a specific file path
      */
-    fun hitDownloadfile(fileUrl: String){
+    fun hitDownloadFile(fileUrl: String){
         disposables.add(repository.excuteDownloadFile(fileUrl)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

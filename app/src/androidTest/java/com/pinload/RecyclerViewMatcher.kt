@@ -2,7 +2,6 @@ package com.pinload
 
 import android.content.res.Resources
 import android.support.v7.widget.RecyclerView
-import android.content.res.Resources.NotFoundException
 import android.view.View
 import org.hamcrest.Description
 import org.hamcrest.Matcher

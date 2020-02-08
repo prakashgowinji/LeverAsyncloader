@@ -1,10 +1,10 @@
 package com.pinload
 
-import android.support.test.espresso.NoMatchingViewException
-import android.support.test.espresso.ViewAssertion
-import android.support.test.espresso.matcher.ViewMatchers
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import androidx.test.espresso.NoMatchingViewException
+import androidx.test.espresso.ViewAssertion
+import androidx.test.espresso.matcher.ViewMatchers
 import org.hamcrest.CoreMatchers
 
 class CustomAssertions {
